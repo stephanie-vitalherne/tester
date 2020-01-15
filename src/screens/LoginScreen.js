@@ -1,10 +1,38 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+
+// COMPONENTS
+import AuthForm from '../components/AuthForm';
+import NavLink from '../components/NavLink';
 
 const LoginScreen = () => {
-  return <Text>BOOBS</Text>;
+  return (
+    <View style={styles.container}>
+      <AuthForm
+        headerText="Log Into Your Account"
+        errorMessage=""
+        onSubmit={() => {}}
+        buttonText="Log In"
+      />
+      <NavLink
+        routeName="Signup"
+        linkText="Don't have an account? Sign up instead"
+      />
+    </View>
+  );
 };
 
-const styles = StyleSheet.create({});
+LoginScreen.navigationOptions = () => {
+  return {
+    headerShown: false
+  };
+};
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    marginBottom: 250
+  }
+});
 export default LoginScreen;
