@@ -1,8 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
-import { Text, Button, Input } from 'react-native-elements';
+import { Text } from 'react-native-elements';
 
+// COMPONENTS
 import Spacer from '../components/Spacer';
+import AuthForm from '../components/AuthForm';
 import { Context as AuthContext } from '../context/AuthContext';
 
 const SignupScreen = ({ navigation }) => {
@@ -10,6 +12,12 @@ const SignupScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <AuthForm
+        headerText="Sign up for Tracker"
+        errorMessage={state.errorMessage}
+        buttonText="Sign up"
+        onSubmit={signup}
+      />
       {/* Login Link */}
       <TouchableOpacity onPress={() => navigation.navigate('Login')}>
         <Spacer>
@@ -33,12 +41,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     marginBottom: 250
-  },
-  errorMessage: {
-    color: 'red',
-    fontSize: 16,
-    marginLeft: 15,
-    marginTop: 15
   },
   loginLink: {
     color: 'blue'
