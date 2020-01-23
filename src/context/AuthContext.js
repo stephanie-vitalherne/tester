@@ -7,6 +7,7 @@ const authReducer = (state, action) => {
   switch (action.type) {
     case 'add_error':
       return { ...state, errorMessage: action.payload };
+    case 'signup':
     case 'login':
       return { errorMessage: '', token: action.payload };
     default:
@@ -19,7 +20,7 @@ const signup = dispatch => async ({ email, password }) => {
   try {
     const response = await trackerApi.post('/signup', { email, password });
     await AsyncStorage.setItem('token', response.data.token);
-    dispatch({ type: 'login', payload: response.data.token });
+    dispatch({ type: 'signup', payload: response.data.token });
 
     // navigate to main flow of app
     navigate('TrackList');
@@ -30,7 +31,6 @@ const signup = dispatch => async ({ email, password }) => {
       payload: 'Something went wrong with signing up'
     });
   }
-  // if signed up, modify the state and say that user is authenticated
 };
 
 const login = dispatch => async ({ email, password }) => {
@@ -44,12 +44,12 @@ const login = dispatch => async ({ email, password }) => {
     navigate('TrackList');
   } catch (err) {
     // if login fails, show error message
+    console.log(err);
     dispatch({
       type: 'add_error',
       payload: 'Something went wrong with logging in'
     });
   }
-  // if logged in, modify the state
 };
 
 const signout = dispatch => {
