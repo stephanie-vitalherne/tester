@@ -7,7 +7,6 @@ const authReducer = (state, action) => {
   switch (action.type) {
     case 'add_error':
       return { ...state, errorMessage: action.payload };
-    case 'signup':
     case 'login':
       return { errorMessage: '', token: action.payload };
     default:
@@ -20,7 +19,7 @@ const signup = dispatch => async ({ email, password }) => {
   try {
     const response = await trackerApi.post('/signup', { email, password });
     await AsyncStorage.setItem('token', response.data.token);
-    dispatch({ type: 'signup', payload: response.data.token });
+    dispatch({ type: 'login', payload: response.data.token });
 
     // navigate to main flow of app
     navigate('TrackList');
