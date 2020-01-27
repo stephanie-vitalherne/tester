@@ -6,6 +6,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 // Components
 import AccountScreen from './src/screens/AccountScreen';
 import LoginScreen from './src/screens/LoginScreen';
+import ResolveAuthScreen from './src/screens/ResolveAuthScreen';
 import SignupScreen from './src/screens/SignupScreen';
 import TrackCreateScreen from './src/screens/TrackCreateScreen';
 import TrackDetailScreen from './src/screens/TrackDetailScreen';
@@ -15,6 +16,7 @@ import { setNavigator } from './src/navigationRef';
 
 // Switch Navigator so the app can abruptly switch from the login/signup screen to the dashboard
 const switchNavigator = createSwitchNavigator({
+  ResolveAuth: ResolveAuthScreen,
   loginFlow: createStackNavigator({
     Signup: SignupScreen,
     Login: LoginScreen
