@@ -39,6 +39,17 @@ const signup = dispatch => async ({ email, password }) => {
   }
 };
 
+// Setting up auto login
+const tryLocalLogin = dispatch => async () => {
+  const token = await AsyncStorage.getItem('token');
+  if (token) {
+    dispatch({ type: 'login', payload: token });
+    navigate('TrackList');
+  } else {
+    navigate('loginFlow');
+  }
+};
+
 const login = dispatch => async ({ email, password }) => {
   // try to login
   try {
@@ -66,6 +77,6 @@ const signout = dispatch => {
 
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { signup, login, signout, clearErrorMessage },
+  { signup, login, signout, clearErrorMessage, tryLocalLogin },
   { token: null, errorMessage: '' }
 );
